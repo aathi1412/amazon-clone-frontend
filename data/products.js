@@ -656,5 +656,53 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: "id1",
+    image: "images/products/umbrella.jpg",
+    name: "Trendy Umbrella - Green",
+    rating: {
+      stars: 4.5,
+      count: 2026
+    },
+    priceCents: 499,
+    keywords: [
+      "umbrella",
+      "fashion",
+      "colorful",
+      "rainny"
+    ]
+  },
+  {
+    id: "id2",
+    image: "images/products/demon-slayer-sticker.jpg",
+    name: "Demon Slayer Sticker",
+    rating: {
+      stars: 4.5,
+      count: 5570
+    },
+    priceCents: 299,
+    keywords: [
+      "demon",
+      "demonslayer",
+      "zenitsu",
+      "lighting"
+    ]
+  },
+  {
+    id: "id3",
+    image: "images/products/sabrina-carpenter-kiss.png",
+    name: "Sabrina Carpenter Kissing",
+    rating: {
+      stars: 5,
+      count: 505570
+    },
+    priceCents: 29999,
+    keywords: [
+      "Sabrina",
+      "redlips",
+      "Kissing",
+      "sexy"
+    ]
   }
 ];
