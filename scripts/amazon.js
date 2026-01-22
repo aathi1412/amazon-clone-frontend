@@ -1,4 +1,4 @@
-import { cart } from '../data/cart.js';
+import { cart, addToCart } from '../data/cart.js';
 import { products } from '../data/products.js';
 
 
@@ -59,41 +59,19 @@ products.forEach(product => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-let intervalId;
+function cartQuantityUpdation(){
+    let cartQuantity = 0;
 
-document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
-    button.addEventListener('click', () => {
-        const {productId} = button.dataset;
-
-        let noOfQuantity =  Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
-
-        let matchingItem;
-
-        cart.forEach((item) => {
-            if(productId === item.productId){
-                matchingItem = item;
-            }
-        });
-
-        if(matchingItem){
-            matchingItem.quantity += noOfQuantity;
-        }
-        else{
-            cart.push({
-                productId,
-                quantity: noOfQuantity
-            });
-        }
-        
-        let cartQuantity = 0;
-
-        cart.forEach((item) => {
-            cartQuantity += item.quantity;
+        cart.forEach((cartItem) => {
+            cartQuantity += cartItem.quantity;
         });
 
         document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
 
-       const addedButton = document.querySelector(`.js-added-to-cart-${productId}`);
+let intervalId;
+function showAddedMessage(productId){
+     const addedButton = document.querySelector(`.js-added-to-cart-${productId}`);
        addedButton.classList.add('is-added-to-cart');
 
         
@@ -104,6 +82,20 @@ document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
        intervalId = setTimeout(() => {
             addedButton.classList.remove('is-added-to-cart');
        }, 2000);
+}
+
+document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
+    button.addEventListener('click', () => {
+        const {productId} = button.dataset;
+
+        
+
+        addToCart(productId);
+        
+        cartQuantityUpdation();
+        
+        showAddedMessage(productId);
+      
 
        
 
