@@ -1,7 +1,10 @@
-import { cart, removeFromCart } from '../data/cart.js';
+import { cart, removeFromCart, calculateCartQuantity, updateNewQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { currencyFormat } from './utils/money.js';
 
+        if(cart.length === 0){
+            document.querySelector(`.js-cart-empty-message`).innerHTML = '<p>your cart is Empty</p>';
+        }
 
 let cartSummaryHTML = ''; 
 cart.forEach((cartItem) => {
@@ -14,7 +17,6 @@ cart.forEach((cartItem) => {
         }
     });
 
-    // console.log(matchingProduct);
 
     cartSummaryHTML += `
         <div class="cart-item-container 
@@ -36,11 +38,15 @@ cart.forEach((cartItem) => {
                 </div>
                 <div class="product-quantity">
                 <span>
-                    Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                    Quantity: <span class="quantity-label js-quantity-label-${matchingProduct.id}">${cartItem.quantity}</span>
                 </span>
-                <span class="update-quantity-link link-primary js-update-link">
+                <span class="update-quantity-link link-primary js-update-quantity-link js-update-quantity-link-${matchingProduct.id}" data-product-id="${matchingProduct.id}">
                     Update
                 </span>
+                <span> <input type="number" class="quantity-input js-quantity-input-${matchingProduct.id}"> </span>
+
+                <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id="${matchingProduct.id}">save</span>
+
                 <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                     Delete
                 </span>
@@ -98,17 +104,80 @@ cart.forEach((cartItem) => {
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
+
 document.querySelectorAll('.js-delete-link').forEach((link) => {
     link.addEventListener('click', () => {
         const  {productId}  = link.dataset;
         removeFromCart(productId);
 
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
+
         container.remove();
+
+        const cartQuantity = calculateCartQuantity();
+        document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
 
         if(cart.length === 0){
             document.querySelector(`.js-cart-empty-message`).innerHTML = '<p>your cart is Empty</p>';
         }
+ 
     });
     
 });
+
+
+const cartQuantity = calculateCartQuantity();
+document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
+
+
+document.querySelectorAll('.js-update-quantity-link').forEach((updateLink) => {
+    updateLink.addEventListener('click', () => {
+        const {productId} = updateLink.dataset;
+
+        const container = document.querySelector(`.js-cart-item-container-${productId}`);
+
+        container.classList.add('is-editing-quantity');
+
+        });   
+});
+
+
+function handleQuantityInput(productId, quantityInput){
+    let newQuantity = Number(quantityInput.value);
+
+    if(newQuantity <= 0 || newQuantity > 1000){
+        alert('Quantity must be at least 0 and less than 1000');
+        return;
+    }
+        
+    updateNewQuantity(productId, newQuantity);
+
+    document.querySelector(`.js-quantity-input-${productId}`).value = '';
+    
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+    container.classList.remove('is-editing-quantity');
+}
+
+document.querySelectorAll('.js-save-quantity-link').forEach((saveLink) => {
+    
+    const {productId} = saveLink.dataset;
+
+    let quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
+
+    saveLink.addEventListener('click', () => {
+        handleQuantityInput(productId, quantityInput);
+    });   
+
+    quantityInput.addEventListener('keydown', (event) => {
+        if(event.key === 'Enter'){
+            handleQuantityInput(productId, quantityInput);
+        }
+        
+    });
+});
+
+
+
+        
+
+
