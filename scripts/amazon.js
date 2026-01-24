@@ -2,6 +2,7 @@ import { cart, addToCart, calculateCartQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { currencyFormat } from './utils/money.js';
 
+
 let productsHTML = '';
 products.forEach(product => {
     productsHTML += `
