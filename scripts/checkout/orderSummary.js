@@ -132,7 +132,7 @@ export function renderOrderSummary(){
             // if(cart.length === 0){
             //     document.querySelector(`.js-cart-empty-message`).innerHTML = '<p>your cart is Empty</p>';
             // }
-            renderCheckout();
+            renderPaymentSummary();
     
         });
         
@@ -179,14 +179,19 @@ export function renderOrderSummary(){
 
         saveLink.addEventListener('click', () => {
             handleQuantityInput(productId, quantityInput);
+
+            renderPaymentSummary();
         });   
 
         quantityInput.addEventListener('keydown', (event) => {
             if(event.key === 'Enter'){
                 handleQuantityInput(productId, quantityInput);
             }
-            
+
+            renderPaymentSummary();
         });
+        
+        
     });
 
     document.querySelectorAll('.js-delivery-option').forEach(element => {
