@@ -1,11 +1,12 @@
 import { cart, removeFromCart, calculateCartQuantity, updateNewQuantity, updateDeliveryOption } from '../../data/cart.js';
-import { products } from '../../data/products.js';
+import { products, getProduct } from '../../data/products.js';
 import { currencyFormat } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { deliveryOptions } from '../../data/deliveryOption.js';
+import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOption.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 
 
-export function renderCheckout(){
+export function renderOrderSummary(){
 
     if(cart.length === 0){
         document.querySelector(`.js-cart-empty-message`).innerHTML = '<p>your cart is Empty</p>';
@@ -15,28 +16,19 @@ export function renderCheckout(){
 
     cart.forEach((cartItem) => {
         const productId = cartItem.productId;
-        let matchingProduct;
 
-        products.forEach((product) => {
-            if(product.id === productId){
-                matchingProduct = product;
-            }
-        });
+        let matchingProduct = getProduct(productId);
 
         let deliveryOptionId = cartItem.deliveryOptionId;
 
-        let deliveryOption;
-        deliveryOptions.forEach((Option) => {
-            if(Option.id === deliveryOptionId){
-                deliveryOption = Option;
-            }
-        });
+        let deliveryOption = getDeliveryOption(deliveryOptionId);
+
+        
 
         const today = dayjs();
         const deliveryDate = today.add(deliveryOption.deliveryDays, 'days'); 
 
         const dateString = deliveryDate.format('dddd, MMMM D');
-        console.log(dateString);
 
 
         cartSummaryHTML += `
@@ -99,6 +91,7 @@ export function renderCheckout(){
             const priceString = deliveryOption.priceCents === 0 
             ? 'FREE' 
             : `$${currencyFormat(deliveryOption.priceCents)} -`;
+
             let isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
             html += 
@@ -200,7 +193,8 @@ export function renderCheckout(){
         element.addEventListener('click', () => {
             const {productId, deliveryOptionId}= element.dataset;
             updateDeliveryOption(productId, deliveryOptionId);
-            renderCheckout();
+            renderOrderSummary();
+            renderPaymentSummary();
         });
     });
 
