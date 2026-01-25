@@ -83,13 +83,17 @@ document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
     button.addEventListener('click', () => {
         const {productId} = button.dataset;
 
-        addToCart(productId);
+        let noOfQuantity =  Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+
+        addToCart(productId, noOfQuantity);
 
         const cartQuantity = calculateCartQuantity();
 
         document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
         
         showAddedMessage(productId);
+
+        document.querySelector(`.js-quantity-selector-${productId}`).value = 1;
 
     });
 });
