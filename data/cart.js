@@ -28,7 +28,6 @@ export function saveToStorage(){
 }
 
 export function addToCart(productId, noOfQuantity){
-    // let noOfQuantity =  Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
 
     let matchingItem;
 
