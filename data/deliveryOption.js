@@ -27,6 +27,17 @@ export function getDeliveryOption(deliveryOptionId){
     return deliveryOption || deliveryOptions[0];
 }
 
+export function validDeliveryOption(deliveryOptionId){
+
+    let found = false;
+    deliveryOptions.forEach((Option) => {
+        if(Option.id === deliveryOptionId){
+            found = true;
+        }
+    });
+    return found;
+}
+
 // export function calculateDeliveryDate(deliveryOption){
 //     const today = dayjs();
 //     const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
