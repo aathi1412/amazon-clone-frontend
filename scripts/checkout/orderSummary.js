@@ -1,4 +1,5 @@
-import { cart, removeFromCart, calculateCartQuantity, updateNewQuantity, updateDeliveryOption } from '../../data/cart.js';
+// import { cart, removeFromCart, calculateCartQuantity, updateNewQuantity, updateDeliveryOption } from '../../data/cart.js';
+import {cart} from '../../data/cart-class.js';
 import { products, getProduct } from '../../data/products.js';
 import { currencyFormat } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
@@ -10,13 +11,13 @@ export function renderOrderSummary(){
 
     renderCheckoutHeader();
 
-    if(cart.length === 0){
+    if(cart.cartItems.length === 0){
         document.querySelector(`.js-cart-empty-message`).innerHTML = '<p>your cart is Empty</p>';
     }
 
     let cartSummaryHTML = ''; 
 
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
         const productId = cartItem.productId;
 
         let matchingProduct = getProduct(productId);
@@ -120,7 +121,7 @@ export function renderOrderSummary(){
     document.querySelectorAll('.js-delete-link').forEach((link) => {
         link.addEventListener('click', () => {
             const  {productId}  = link.dataset;
-            removeFromCart(productId);
+            cart.removeFromCart(productId);
 
             renderOrderSummary();
             renderPaymentSummary();
@@ -152,7 +153,7 @@ export function renderOrderSummary(){
             return;
         }
             
-        updateNewQuantity(productId, newQuantity);
+        cart.updateNewQuantity(productId, newQuantity);
 
         document.querySelector(`.js-quantity-input-${productId}`).value = '';
         
@@ -187,7 +188,7 @@ export function renderOrderSummary(){
     document.querySelectorAll('.js-delivery-option').forEach(element => {
         element.addEventListener('click', () => {
             const {productId, deliveryOptionId}= element.dataset;
-            updateDeliveryOption(productId, deliveryOptionId);
+            cart.updateDeliveryOption(productId, deliveryOptionId);
             renderOrderSummary();
             renderPaymentSummary();
         });

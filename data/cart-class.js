@@ -1,6 +1,6 @@
 import { validDeliveryOption } from "./deliveryOption.js";
 
-class Cart {
+export class Cart {
     cartItems;
     #localStorageKey;
 
@@ -24,6 +24,10 @@ class Cart {
                     deliveryOptionId: '2'
                 }];
         }
+    }
+
+    get loadFromStorage(){
+        return this.loadFromStorage();
     }
 
 
@@ -126,11 +130,10 @@ class Cart {
 
 
 
-const cart = new Cart('cart-oop');
-const buisnessCart = new Cart('buisness-cart');
+export const cart = new Cart('cart');
 
 
-console.log(cart);
-console.log(buisnessCart);
+// const buisnessCart = new Cart('buisness-cart');
+// console.log(buisnessCart);
 
 

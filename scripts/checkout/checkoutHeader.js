@@ -1,11 +1,12 @@
 import { calculateCartQuantity } from "../../data/cart.js";
+import {cart} from '../../data/cart-class.js';
 
 
 
 export function renderCheckoutHeader(){
     let checkoutHeaderHTML = '';
 
-    const cartQuantity = calculateCartQuantity();
+    const cartQuantity = cart.calculateCartQuantity();
 
     checkoutHeaderHTML = 
     `
