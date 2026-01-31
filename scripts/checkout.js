@@ -14,11 +14,10 @@ async function loadPage(){
         loadCart(() => {
             resolve();
         });
-    })
+    });
      
     renderOrderSummary();
-    renderPaymentSummary(); 
-
+    renderPaymentSummary();
 }
 
 loadPage();
