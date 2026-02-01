@@ -99,7 +99,7 @@ export class Cart {
         const quantity = document.querySelector(`.js-quantity-label-${productId}`);
         quantity.innerHTML = newQuantity;
 
-        const cartQuantity = calculateCartQuantity();
+        const cartQuantity = this.calculateCartQuantity();
         document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
 
         this.saveToStorage();
@@ -147,3 +147,12 @@ export function loadCart(fun){
   xhr.open('GET', 'https://supersimplebackend.dev/cart');
   xhr.send();
 }
+
+
+export async function loadCartFetch() {
+    const response = await fetch('https://supersimplebackend.dev/cart');
+
+    const cart = await response.text();
+    console.log(cart);
+}
+

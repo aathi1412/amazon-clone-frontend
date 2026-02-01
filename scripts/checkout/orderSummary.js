@@ -21,6 +21,7 @@ export function renderOrderSummary(){
         const productId = cartItem.productId;
 
         let matchingProduct = getProduct(productId);
+        // console.log(matchingProduct);
 
         let deliveryOptionId = cartItem.deliveryOptionId;
 

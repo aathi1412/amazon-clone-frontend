@@ -218,3 +218,10 @@
     padding: 12px;
   }
 }
+
+
+.empty-message{
+  font-size: 30px;
+  text-align: center;
+  margin-top: 50px;
+}
