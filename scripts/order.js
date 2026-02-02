@@ -1,11 +1,8 @@
 import { orders } from '../data/ordersData.js';
 import { products ,getProduct, loadProductsFetch } from '../data/products.js';
-import { getDeliveryOption, formatDeliveryDate } from '../data/deliveryOption.js';
-import { currencyFormat } from './utils/money.js';
+import { formatCurrency } from './utils/money.js';
 import { cart } from '../data/cart-class.js';
-
-
-
+import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
 async function loadPage() {
     await loadProductsFetch();
@@ -30,11 +27,11 @@ function renderOrders(){
                 <div class="order-header-left-section">
                     <div class="order-date">
                     <div class="order-header-label">Order Placed:</div>
-                    <div>${formatDeliveryDate(order.orderTime)}</div>
+                    <div>${dayjs(order.orderTime).format('MMMM, D')}</div>
                     </div>
                     <div class="order-total">
                     <div class="order-header-label">Total:</div>
-                    <div>$${currencyFormat(order.totalCostCents)}</div>
+                    <div>$${formatCurrency(order.totalCostCents)}</div>
                     </div>
                 </div>
 
@@ -82,7 +79,7 @@ function renderProductList(order){
             const productId = product.productId;
             let matchingProduct = getProduct(productId);
 
-            let deliveryDate = formatDeliveryDate(product.estimatedDeliveryTime);
+            let deliveryDate = dayjs(product.estimatedDeliveryTime).format('MMMM, D');
 
             orderDetailHTML += 
             `

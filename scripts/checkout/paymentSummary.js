@@ -1,8 +1,8 @@
 // import { cart, calculateCartQuantity } from "../../data/cart.js";
-import {cart} from '../../data/cart-class.js';
+import {cart, resetCart} from '../../data/cart-class.js';
 
 import { getProduct } from "../../data/products.js"; 
-import { currencyFormat } from "../utils/money.js";
+import { formatCurrency } from "../utils/money.js";
 import {  getDeliveryOption } from "../../data/deliveryOption.js";
 import { addOrder } from '../../data/ordersData.js';
 
@@ -41,27 +41,27 @@ export function renderPaymentSummary(){
             <div class="payment-summary-row">
                 <div>Items (${cartQuantity}):</div>
                 <div class="payment-summary-money">
-                $${currencyFormat(itemPrice)}</div>
+                $${formatCurrency(itemPrice)}</div>
             </div>
 
             <div class="payment-summary-row">
                 <div>Shipping &amp; handling:</div>
-                <div class="payment-summary-money js-shipping">$${currencyFormat(shippingPrice)}</div>
+                <div class="payment-summary-money js-shipping">$${formatCurrency(shippingPrice)}</div>
             </div>
 
             <div class="payment-summary-row subtotal-row">
                 <div>Total before tax:</div>
-                <div class="payment-summary-money">$${currencyFormat(totalBeforeTax)}</div>
+                <div class="payment-summary-money">$${formatCurrency(totalBeforeTax)}</div>
             </div>
 
             <div class="payment-summary-row">
                 <div>Estimated tax (10%):</div>
-                <div class="payment-summary-money">$${currencyFormat(estimatedTax)}</div>
+                <div class="payment-summary-money">$${formatCurrency(estimatedTax)}</div>
             </div>
 
             <div class="payment-summary-row total-row">
                 <div>Order total:</div>
-                <div class="payment-summary-money js-total">$${currencyFormat(totalBeforeTax + estimatedTax)}</div>
+                <div class="payment-summary-money js-total">$${formatCurrency(totalBeforeTax + estimatedTax)}</div>
             </div>
 
             <button class="place-order-button button-primary js-place-order">
@@ -98,7 +98,7 @@ export function renderPaymentSummary(){
             console.log('unexpected error. please try again later');
         }
         
-        cart.removeAllFromCart();
+        resetCart();
         
         window.location.href = 'orders.html';
     });

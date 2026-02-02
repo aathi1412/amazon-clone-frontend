@@ -1,6 +1,5 @@
 import {getOrder} from '../data/ordersData.js';
 import {loadProductsFetch, getProduct} from '../data/products.js';
-import {formatDeliveryDate} from '../data/deliveryOption.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
 
@@ -40,7 +39,10 @@ async function loadPage() {
                 </a>
 
                 <div class="delivery-date">
-                Arriving on ${formatDeliveryDate(deliveryTime)}
+                ${progressPercent >= 100 
+                    ? 'Delivered on'
+                    :'Arriving on'}
+                 ${dayjs(deliveryTime).format('MMMM, D')}
                 </div>
 
                 <div class="product-info">

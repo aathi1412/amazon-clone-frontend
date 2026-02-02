@@ -1,4 +1,4 @@
-import { currencyFormat } from "../scripts/utils/money.js";
+import { formatCurrency } from "../scripts/utils/money.js";
 
 
 export function getProduct(productId){
@@ -19,6 +19,7 @@ class Product {
   name;
   rating;
   priceCents;
+  keywords;
 
   constructor(productDetails){
 
@@ -27,6 +28,7 @@ class Product {
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.keywords = productDetails.keywords;
   }
 
   getStarsUrl(){
@@ -34,7 +36,7 @@ class Product {
   }
 
   getPrice(){
-    return `$${currencyFormat(this.priceCents)}`;
+    return `$${formatCurrency(this.priceCents)}`;
   }
 
   extraInfoHTML(){
@@ -135,6 +137,21 @@ export function loadProductsFetch(){
   
   return promise;
 }
+let search = 'kitchen';
+let filteredProducts = products.filter((product) => {
+
+    // const filterproductsByName = product.name.includes(search);
+
+    // const filterproductsByKeywords = product.keywords.forEach((keyWord) => {
+        
+    //       return keyWord.toLowerCase().includes(search);
+        
+    // });
+    
+    return product.name.toLowerCase().includes(search) ||
+    product.keywords.toLowerCase().includes(search);
+}); 
+// console.log(filteredProducts);
 /*
 loadProductsFetch().then(() => {
   console.log('next step');

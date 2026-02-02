@@ -1,7 +1,7 @@
 // import { cart, removeFromCart, calculateCartQuantity, updateNewQuantity, updateDeliveryOption } from '../../data/cart.js';
 import {cart} from '../../data/cart-class.js';
 import { products, getProduct } from '../../data/products.js';
-import { currencyFormat } from '../utils/money.js';
+import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOption.js';
 import { renderPaymentSummary } from './paymentSummary.js';
@@ -89,7 +89,7 @@ export function renderOrderSummary(){
 
             const priceString = deliveryOption.priceCents === 0 
             ? 'FREE' 
-            : `$${currencyFormat(deliveryOption.priceCents)} -`;
+            : `$${formatCurrency(deliveryOption.priceCents)} -`;
 
             let isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 

@@ -72,11 +72,6 @@ export class Cart {
 
         this.saveToStorage();
     }
-    removeAllFromCart(){
-        const newcart = [];
-        this.cartItems = newcart;
-        this.saveToStorage();
-    }
 
     calculateCartQuantity(){
 
@@ -136,6 +131,10 @@ export class Cart {
 
 export const cart = new Cart('cart');
 
+export function resetCart(){
+    cart = [];    
+    this.saveToStorage();
+}
 
 // const buisnessCart = new Cart('buisness-cart');
 // console.log(buisnessCart);
