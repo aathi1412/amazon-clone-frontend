@@ -103,7 +103,7 @@ class Item extends Product{
 
 export let products = [];
 
-export function loadProductsFetch(fun){
+export function loadProductsFetch(){
 
   const promise = fetch(
     'https://supersimplebackend.dev/products'
@@ -130,7 +130,7 @@ export function loadProductsFetch(fun){
         });
 
         console.log('products loaded');
-        fun();
+        
   });
   
   return promise;

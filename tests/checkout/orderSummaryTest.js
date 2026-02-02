@@ -1,5 +1,5 @@
 import {renderOrderSummary} from '../../scripts/checkout/orderSummary.js';
-import { loadProducts, loadProductsFetch } from '../../data/products.js';
+import {  loadProductsFetch } from '../../data/products.js';
 import renderCheckoutHeader from '../../scripts/checkout/checkoutHeader.js';
 import {cart} from '../../data/cart-class.js';
 

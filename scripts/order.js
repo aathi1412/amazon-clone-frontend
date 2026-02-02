@@ -2,9 +2,17 @@ import { orders } from '../data/ordersData.js';
 import { products ,getProduct, loadProductsFetch } from '../data/products.js';
 import { getDeliveryOption, formatDeliveryDate } from '../data/deliveryOption.js';
 import { currencyFormat } from './utils/money.js';
+import { cart } from '../data/cart-class.js';
 
-loadProductsFetch(renderOrders);
-console.log(orders);
+
+
+
+async function loadPage() {
+    await loadProductsFetch();
+
+    renderOrders();
+}
+loadPage();
 
 function renderOrders(){
     
@@ -42,9 +50,27 @@ function renderOrders(){
         `;
         
     });
-    document.querySelector('.js-orders-grid').innerHTML = orderHTML;
 
-    
+    document.querySelector('.js-orders-grid').innerHTML = orderHTML;
+    const cartQuantity = cart.calculateCartQuantity();
+    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+
+    document.querySelectorAll('.js-buy-again').forEach((button) => {
+        button.addEventListener('click', () => {
+            const {productId} = button.dataset;
+            cart.addToCart(productId, 1);
+
+            // button.classList.add('buy-again');
+            // console.log(button);
+            // setTimeout(() => {
+            //     button.classList.remove('buy-again');
+            //     console.log(button);
+            // }, 1000);
+            
+            renderOrders();
+        });
+    });
+      
 }
 
 function renderProductList(order){
@@ -75,14 +101,17 @@ function renderProductList(order){
                 <div class="product-quantity">
                     Quantity: ${product.quantity}
                 </div>
-                <button class="buy-again-button button-primary">
-                    <img class="buy-again-icon" src="images/icons/buy-again.png">
+                <button class="buy-again-button button-primary js-buy-again-button js-buy-again" data-product-id="${productId}">
+                    <img class="buy-again-icon js-buy-again-icon" src="images/icons/buy-again.png">
                     <span class="buy-again-message">Buy it again</span>
+                    <span class="buy-again-success">
+                    <span class="check">✓</span> Added
+                    </span>
                 </button>
             </div>
 
             <div class="product-actions">
-                <a href="tracking.html">
+                <a href="tracking.html?orderId=${order.id}&productId=${productId}">
                     <button class="track-package-button button-secondary">
                     Track package
                     </button>

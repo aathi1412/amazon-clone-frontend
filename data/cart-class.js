@@ -72,7 +72,11 @@ export class Cart {
 
         this.saveToStorage();
     }
-
+    removeAllFromCart(){
+        const newcart = [];
+        this.cartItems = newcart;
+        this.saveToStorage();
+    }
 
     calculateCartQuantity(){
 

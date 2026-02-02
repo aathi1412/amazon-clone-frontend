@@ -4,26 +4,26 @@ import { loadProductsFetch } from'../data/products.js';
 import { loadCart, loadCartFetch } from "../data/cart-class.js";
 
 
-loadProductsFetch(() => {
-    renderOrderSummary();
-    renderPaymentSummary();     
-});
-
-// async function loadPage(){
-
-//     await loadProductsFetch();
-
-//     await new Promise((resolve) => {
-//         loadCartFetch(() => {
-//             resolve();
-//         });
-//     });
-     
+// loadProductsFetch(() => {
 //     renderOrderSummary();
-//     renderPaymentSummary();
-// }
+//     renderPaymentSummary();     
+// });
 
-// loadPage();
+async function loadPage(){
+
+    await loadProductsFetch();
+
+    // await new Promise((resolve) => {
+    //     loadCartFetch(() => {
+    //         resolve();
+    //     });
+    // });
+     
+    renderOrderSummary();
+    renderPaymentSummary();
+}
+
+loadPage();
 
 // Promise.all([
 
