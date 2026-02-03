@@ -145,4 +145,10 @@ export function resetCart(){
     cart.saveToStorage();
 }
 
+// --------------function for update cart quantity--------------------
 
+export function updateCartQuantity(){
+    const cartQuantity = cart.calculateCartQuantity();
+
+    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}

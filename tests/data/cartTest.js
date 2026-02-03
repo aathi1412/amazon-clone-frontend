@@ -1,6 +1,4 @@
-// import {addToCart, cart, loadFromStorage, removeFromCart, updateDeliveryOption} from '../../data/cart.js';
-
-import {cart} from '../../data/cart-class.js';
+import {cart} from '../../data/cart.js';
 
 describe('test suite : addTocart function', () => {
 

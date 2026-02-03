@@ -1,5 +1,5 @@
-import { cart } from '../data/cart.js';
-import { products, loadProductsFetch } from '../data/products.js';
+import {cart, updateCartQuantity} from '../data/cart.js';
+import {products, loadProductsFetch} from '../data/products.js';
 
 
 //-------------load products---------
@@ -98,8 +98,7 @@ function renderProductsGrid(){
 //-----------cart quantity updation------------
 
 
-    const cartQuantity = cart.calculateCartQuantity();
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+    updateCartQuantity();
 
 //------------show added message-----------------
 
@@ -147,7 +146,7 @@ function renderProductsGrid(){
         const search = document.querySelector('.js-search-bar').value;
 
         window.location.href = 
-        `amazon.html?search=${search}`;
+        `index.html?search=${search}`;
     });
 // -------------search button ENTER Event--------
     document.querySelector('.js-search-bar').addEventListener('keydown', (event) => {
@@ -155,7 +154,7 @@ function renderProductsGrid(){
             const search = document.querySelector('.js-search-bar').value;
 
             window.location.href = 
-                `amazon.html?search=${search}`;
+                `index.html?search=${search}`;
         }
     });
 }
