@@ -159,8 +159,20 @@
 }
 
 
-.js-no-match{
-  margin-top: 50px;
-  margin-left: 30px;
-  font-size: larger;
+
+@media (min-width: 701px) {
+  .js-no-match{
+    margin-top: 50px;
+    margin-left: 30px;
+    font-size: larger;
+  }
+}
+
+@media (max-width: 700px) {
+  .js-no-match{
+    font-size: large;
+    margin-top: 40px;
+    margin-left: 20px;
+  }
+  
 }

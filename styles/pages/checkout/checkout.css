@@ -227,10 +227,19 @@
 }
 
 
-
-.js-cart-empty-message  {
-  margin-top: 80px;
-  text-align: center;
-  font-size: 40px;
+@media (max-width : 1000px)  {
+  .js-cart-empty-message  {
+    margin-top: 80px;
+    text-align: center;
+    font-size: 40px;
+  }
 }
+
+@media (min-width : 1001px){
+.js-cart-empty-message  {
+    font-size: 25px;
+    text-align: center;
+  }
+}
+
 

@@ -220,12 +220,24 @@
 }
 
 
+@media (min-width: 800px){
 .empty-message{
-  font-size: 30px;
-  text-align: center;
-  margin-top: 50px;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 50px;
+  }
 }
+
+@media (max-width: 799px){
+.empty-message{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 40px;
+  }
+}
+
 
 .buy-again-success{
   display: none;
 }
+
