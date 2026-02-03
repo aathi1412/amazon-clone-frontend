@@ -3,6 +3,7 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { loadProductsFetch } from'../data/products.js';
 
 
+//-------------load products---------
 
 async function loadPage(){
 

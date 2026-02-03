@@ -2,7 +2,7 @@ import { cart } from '../data/cart.js';
 import { products, loadProductsFetch } from '../data/products.js';
 
 
-
+//-------------load products---------
 
 async function loadPage() {
     await loadProductsFetch();
@@ -13,7 +13,9 @@ loadPage();
 
 
 function renderProductsGrid(){
-    let productsHTML = '';
+
+//--------------search bar---------
+//----------filter products by search-----------
 
     const url = new URL(window.location.href);
     const search = url.searchParams.get('search');
@@ -29,6 +31,10 @@ function renderProductsGrid(){
     if(filteredProducts.length === 0){
         document.querySelector('.js-no-match').innerHTML = '<p>No products matched for your search, try different</p>';
     }
+
+//------------generate products------------
+
+    let productsHTML = '';
 
     filteredProducts.forEach(product => {
         productsHTML += `

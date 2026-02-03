@@ -10,6 +10,7 @@ import { addOrder } from '../../data/ordersData.js';
 
 export function renderPaymentSummary(){
 
+
     let itemPrice = 0;
     let shippingPrice = 0;
 
@@ -26,6 +27,7 @@ export function renderPaymentSummary(){
     const totalBeforeTax = itemPrice + shippingPrice;
     const estimatedTax = totalBeforeTax * 0.1;
 
+//--------------- payment summary--------------
 
     let paymentSummaryHTML = '';
 
@@ -70,6 +72,8 @@ export function renderPaymentSummary(){
 
     document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
 
+//--------------place order button--------------
+    
     document.querySelector('.js-place-order').addEventListener('click', async () => {
 
         if(cart.cartItems.length === 0){

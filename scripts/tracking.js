@@ -7,7 +7,12 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
 
 async function loadPage() {
+
+// ------------load products--------
+
     await loadProductsFetch();
+
+// ---------get url parameters------------
 
     const url = new URL(window.location.href);
     const orderId = url.searchParams.get('orderId');
@@ -15,6 +20,8 @@ async function loadPage() {
 
     const product = getProduct(productId);
     const order = getOrder(orderId);
+    
+//---------get productDetails-----------
 
     let productDetails;
     order.products.forEach((details) => {
@@ -23,13 +30,15 @@ async function loadPage() {
         }
     });
 
+// --------calculate width for track delivery-------------
+
     const today = dayjs();
     const orderTime = dayjs(order.orderTime);
     const deliveryTime = dayjs(productDetails.estimatedDeliveryTime);
     
     const progressPercent = ((today - orderTime) / (deliveryTime - orderTime)) *100;
 
-    console.log(progressPercent);
+// ---------generate products to track---------- 
 
         let trackingHTML = 
         `

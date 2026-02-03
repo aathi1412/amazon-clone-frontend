@@ -1,6 +1,10 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
 
+
+
+//------function to get product details by product id-------
+
 export function getProduct(productId){
   let matchingProduct;
 
@@ -12,6 +16,7 @@ export function getProduct(productId){
     return matchingProduct;
 }
 
+// ----------product class { parent class }---------
 
 class Product {
   id;
@@ -45,6 +50,8 @@ class Product {
 
 }
 
+// -------Clothing class { child class }-------{ inhertance }
+
 class Clothing extends Product{
 
   sizeChartLink;
@@ -62,6 +69,8 @@ class Clothing extends Product{
     `;
   }
 }
+
+// -------Appliance class { child class }-------{ inhertance }
 
 class Appliance extends Product{
   warrantyLink;
@@ -81,27 +90,9 @@ class Appliance extends Product{
   }
 }
 
-class Item extends Product{
-  BBSize;
-  pussyColor;
-
-  constructor(productDetails){
-    super(productDetails);
-    this.BBSize = productDetails.BBSize;
-    this.pussyColor = productDetails.pussyColor;
-  }
-
-  extraInfoHTML(){
-    return `
-    <a href="#">${this.BBSize}</a>
-    <a href="#">${this.pussyColor}</a>
-    `;
-  }
-}
 
 
-
-
+// -----get product details from the backend---------
 
 export let products = [];
 
@@ -135,20 +126,3 @@ export function loadProductsFetch(){
   
   return promise;
 }
-/*
-export const products = .map((productDetails) => {
-  if(productDetails.type === 'clothing'){
-    return new Clothing(productDetails);
-  }
-
-  if(productDetails.type === 'appliance'){
-    return new Appliance(productDetails);
-  }
-
-  if(productDetails.type === 'item'){
-    return new Item(productDetails);
-  }
-  
-  return new Product(productDetails);
-});
-*/

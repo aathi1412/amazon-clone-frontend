@@ -1,5 +1,10 @@
 import { validDeliveryOption } from "./deliveryOption.js";
 
+
+
+
+
+
 export class Cart {
     cartItems;
     #localStorageKey;
@@ -128,9 +133,13 @@ export class Cart {
 }
 
 
+//------object creation for cart class-------
 
 export const cart = new Cart('cart');
 
+
+
+// -----function for reset cart to empty---------
 export function resetCart(){
     cart.cartItems = [];    
     cart.saveToStorage();

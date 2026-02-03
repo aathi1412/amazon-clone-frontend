@@ -1,5 +1,6 @@
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
+
 export const deliveryOptions = [{
     id: '1',
     deliveryDays: 7,
@@ -14,6 +15,7 @@ export const deliveryOptions = [{
     priceCents: 999 
 }];
 
+//---------------to find deliveryOption by id-----------
 
 export function getDeliveryOption(deliveryOptionId){
     let deliveryOption;
@@ -27,6 +29,8 @@ export function getDeliveryOption(deliveryOptionId){
     return deliveryOption || deliveryOptions[0];
 }
 
+//------check for valid Delivery Option----------
+
 export function validDeliveryOption(deliveryOptionId){
 
     let found = false;
@@ -37,6 +41,8 @@ export function validDeliveryOption(deliveryOptionId){
     });
     return found;
 }
+
+//------------ calculate Delivery Date and skip weekends------------
 
 export function calculateDeliveryDate(deliveryOption){
     let addDate = dayjs();

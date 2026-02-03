@@ -4,6 +4,11 @@ import { formatCurrency } from './utils/money.js';
 import { cart } from '../data/cart.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
+
+
+
+//-------------load products---------
+
 async function loadPage() {
     await loadProductsFetch();
 
@@ -11,11 +16,16 @@ async function loadPage() {
 }
 loadPage();
 
+
+
 function renderOrders(){
     
+//-----------display no orders placed message--------
     if(orders.length === 0){
-        document.querySelector('.js-empty-message').innerHTML = 'No orders yet';
+        document.querySelector('.js-empty-message').innerHTML = 'No orders placed yet';
     }
+
+//--------generate order page------------
 
     let orderHTML = '';
     orders.forEach((order) => {
@@ -49,8 +59,13 @@ function renderOrders(){
     });
 
     document.querySelector('.js-orders-grid').innerHTML = orderHTML;
+
+// --------------update cart quantity--------------------
+
     const cartQuantity = cart.calculateCartQuantity();
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+
+// ---------buy it again to added message-----------
 
     document.querySelectorAll('.js-buy-again').forEach((button) => {
         button.addEventListener('click', () => {
@@ -68,6 +83,8 @@ function renderOrders(){
     });
       
 }
+
+//-------------function for generate ordered products---------
 
 function renderProductList(order){
 

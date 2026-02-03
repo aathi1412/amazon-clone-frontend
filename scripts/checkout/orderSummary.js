@@ -1,8 +1,8 @@
 import {cart} from '../../data/cart.js';
-import { getProduct } from '../../data/products.js';
-import { formatCurrency } from '../utils/money.js';
-import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOption.js';
-import { renderPaymentSummary } from './paymentSummary.js';
+import {getProduct} from '../../data/products.js';
+import {formatCurrency} from '../utils/money.js';
+import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOption.js';
+import {renderPaymentSummary} from './paymentSummary.js';
 import renderCheckoutHeader from './checkoutHeader.js';
 
 
@@ -11,9 +11,13 @@ export function renderOrderSummary(){
 
     renderCheckoutHeader();
 
+//---------To display empty cart message--------
+
     if(cart.cartItems.length === 0){
         document.querySelector(`.js-cart-empty-message`).innerHTML = '<p>your cart is Empty</p>';
     }
+
+//-----------generate ordersummary page---------
 
     let cartSummaryHTML = ''; 
 
@@ -79,6 +83,8 @@ export function renderOrderSummary(){
 
     document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
+//------generate delivery options------------
+
     function deliveryOptionHTML(matchingProduct, cartItem){
         let html = '';
 
@@ -118,6 +124,8 @@ export function renderOrderSummary(){
     
     }
 
+//---------delete link----------
+
     document.querySelectorAll('.js-delete-link').forEach((link) => {
         link.addEventListener('click', () => {
             const  {productId}  = link.dataset;
@@ -129,6 +137,8 @@ export function renderOrderSummary(){
         });
         
     });
+
+//-----------update link----------
     
     document.querySelectorAll('.js-update-quantity-link').forEach((updateLink) => {
         updateLink.addEventListener('click', () => {
@@ -141,6 +151,7 @@ export function renderOrderSummary(){
             });   
     });
 
+//-----------update quantity-------------
 
     function handleQuantityInput(productId, quantityInput){
         let newQuantity = Number(quantityInput.value);
@@ -157,6 +168,8 @@ export function renderOrderSummary(){
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
         container.classList.remove('is-editing-quantity');
     }
+
+//------save link-------------
 
     document.querySelectorAll('.js-save-quantity-link').forEach((saveLink) => {
         
@@ -181,6 +194,8 @@ export function renderOrderSummary(){
         
         
     });
+    
+//------------update delivery option-----------------
 
     document.querySelectorAll('.js-delivery-option').forEach(element => {
         element.addEventListener('click', () => {
