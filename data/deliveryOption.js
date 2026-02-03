@@ -58,7 +58,7 @@ export function calculateDeliveryDate(deliveryOption){
     const dateString = addDate.format('dddd, MMMM D');
     return dateString;
 }
-
+// check for weekend-------
 function isWeekend(date){
     const dayOfWeek = date.format('dddd');
     return dayOfWeek === 'Sunday' || dayOfWeek === 'Saturday';
