@@ -1,6 +1,6 @@
-import { cart, addToCart, calculateCartQuantity } from '../data/cart.js';
+import { cart } from '../data/cart.js';
 import { products, loadProductsFetch } from '../data/products.js';
-import { currencyFormat } from './utils/money.js';
+
 
 
 
@@ -92,7 +92,7 @@ function renderProductsGrid(){
 //-----------cart quantity updation------------
 
 
-    const cartQuantity = calculateCartQuantity();
+    const cartQuantity = cart.calculateCartQuantity();
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 
 //------------show added message-----------------
@@ -122,9 +122,9 @@ function renderProductsGrid(){
 
             let noOfQuantity =  Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
 
-            addToCart(productId, noOfQuantity);
+            cart.addToCart(productId, noOfQuantity);
 
-            const cartQuantity = calculateCartQuantity();
+            const cartQuantity = cart.calculateCartQuantity();
 
             document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
             

@@ -1,11 +1,11 @@
-// import { cart, removeFromCart, calculateCartQuantity, updateNewQuantity, updateDeliveryOption } from '../../data/cart.js';
-import {cart} from '../../data/cart-class.js';
-import { products, getProduct } from '../../data/products.js';
+import {cart} from '../../data/cart.js';
+import { getProduct } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
-import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOption.js';
 import { renderPaymentSummary } from './paymentSummary.js';
 import renderCheckoutHeader from './checkoutHeader.js';
+
+
 
 export function renderOrderSummary(){
 
@@ -21,7 +21,6 @@ export function renderOrderSummary(){
         const productId = cartItem.productId;
 
         let matchingProduct = getProduct(productId);
-        // console.log(matchingProduct);
 
         let deliveryOptionId = cartItem.deliveryOptionId;
 
@@ -130,10 +129,7 @@ export function renderOrderSummary(){
         });
         
     });
-
-
     
-
     document.querySelectorAll('.js-update-quantity-link').forEach((updateLink) => {
         updateLink.addEventListener('click', () => {
             const {productId} = updateLink.dataset;
