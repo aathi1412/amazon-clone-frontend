@@ -57,14 +57,13 @@ function renderOrders(){
             const {productId} = button.dataset;
             cart.addToCart(productId, 1);
 
-            // button.classList.add('buy-again');
-            // console.log(button);
-            // setTimeout(() => {
-            //     button.classList.remove('buy-again');
-            //     console.log(button);
-            // }, 1000);
-            
-            renderOrders();
+            button.innerHTML = '✓ Added';
+            setTimeout(() => {
+                button.innerHTML = `
+                <img class="buy-again-icon" src="images/icons/buy-again.png">
+                <span class="buy-again-message">Buy it again</span>
+                `;
+            }, 1000);
         });
     });
       
@@ -101,9 +100,7 @@ function renderProductList(order){
                 <button class="buy-again-button button-primary js-buy-again-button js-buy-again" data-product-id="${productId}">
                     <img class="buy-again-icon js-buy-again-icon" src="images/icons/buy-again.png">
                     <span class="buy-again-message">Buy it again</span>
-                    <span class="buy-again-success">
-                    <span class="check">✓</span> Added
-                    </span>
+                   
                 </button>
             </div>
 
